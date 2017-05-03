@@ -5,6 +5,7 @@
 - [插入图片](#10)
 
 <h2 id="9">链接</h2>
+
 ### 直接链接
 直接使用<...>包括URL或Email地址将自动生成链接并直接呈现<>中的内容，如：
 ```
@@ -24,14 +25,15 @@
 [Email](zengpeiyu@gmail.com)
 
 <h2 id="10">插入图片</h2>
+
 ### 语法    
-~~~
+```
 // Markdown
 ![desc](url)
 
 // HTML
 <img alt="desc" src="url">
-~~~
+```
 
 Markdown是纯文本编辑的，无法像富文本那样直接引用图片，只能引用图片的URL（本地图片URL，网络图片URL），例如：  
 

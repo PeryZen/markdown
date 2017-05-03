@@ -25,13 +25,13 @@
 
 <h2 id="10">插入图片</h2>
 ### 语法    
-```
+~~~
 // Markdown
 ![desc](url)
 
 // HTML
 <img alt="desc" src="url">
-```
+~~~
 
 Markdown是纯文本编辑的，无法像富文本那样直接引用图片，只能引用图片的URL（本地图片URL，网络图片URL），例如：  
 

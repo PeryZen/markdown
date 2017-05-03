@@ -22,7 +22,7 @@ class Clipboard(object):
         粘贴
 
         :param dirpath:     文件路径，默认为临时文件夹的路径
-        :param file_name:   文件名称
+        :param filename:   文件名称
         :return: 
             [text, false] - 若剪切板里有文本内容，则返回文本内容
             [path, true]  - 若剪切板里有图片内容，则将图片写入临时文件，然后返回文件的路径
@@ -55,4 +55,3 @@ class Clipboard(object):
         except Exception as e:
             print('Paste image from clipboard error: {}'.format(e))
             return None, True
-

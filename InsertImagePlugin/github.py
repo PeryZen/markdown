@@ -174,4 +174,3 @@ class Operation:
     @staticmethod
     def __extract_filename(rsp):
         return rsp.json()['content']['name']
-

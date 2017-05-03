@@ -3,9 +3,14 @@
 
 import os
 
-from ConfigParser import ConfigParser
 from clipboard import Clipboard
 from github import Operation
+try:
+    # python 2
+    from ConfigParser import ConfigParser
+except ImportError:
+    # python 3
+    from configparser import ConfigParser
 
 
 def img2url():
@@ -20,7 +25,7 @@ def img2url():
         print(file_path)
 
         resource_url = upload_file(config, file_path)
-        print resource_url
+        print(resource_url)
 
         url = translate_url(resource_url)
         Clipboard.copy(url)

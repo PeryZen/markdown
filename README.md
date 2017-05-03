@@ -24,7 +24,7 @@
 [Email](zengpeiyu@gmail.com)
 
 <h2 id="10">插入图片</h2>
-### 语法
+### 语法    
 ```
 // Markdown
 ![desc](url)
@@ -33,9 +33,9 @@
 <img alt="desc" src="url">
 ```
 
-Markdown是纯文本编辑的，无法像富文本那样直接引用图片，只能引用图片的URL（本地图片URL，网络图片URL），例如：
+Markdown是纯文本编辑的，无法像富文本那样直接引用图片，只能引用图片的URL（本地图片URL，网络图片URL），例如：  
 
-* 本地图片  
+* 本地图片    
 ```
 // Markdown
 ![复仇者联盟之超人笑笑](/Users/Pery/Pictures/复仇者联盟之超人笑笑.png)
@@ -44,7 +44,7 @@ Markdown是纯文本编辑的，无法像富文本那样直接引用图片，只
 <img alt="复仇者联盟之超人笑笑" src="/Users/Pery/Pictures/复仇者联盟之超人笑笑.png">
 ```
 
-* 网络图片  
+* 网络图片    
 ```
 // Markdown
 ![复仇者联盟之超人笑笑](https://github.com/PeryZen/MarkdownImages/blob/master/复仇者联盟之超人笑笑.jpeg)
@@ -62,12 +62,12 @@ Markdown是纯文本编辑的，无法像富文本那样直接引用图片，只
 
 现在有很多专业的图床服务提供商，如国内的七牛，极简图床等，他们会提供一些工具来简化图片的管理操作，不过要么需要付费，要么不够稳定。
 其实，Github也可以提供类似的图床功能，免费，稳定，速度也快。具体方法如下：  
-1，创建一个Github工程，如：  
+1，创建一个Github工程，如：    
 ```
 https://github.com/PeryZen/MarkdownImages
 ```
 
-2，上传图片至工程中，则该文件的访问路径即为可用的图片URL，如：
+2，上传图片至工程中，则该文件的访问路径即为可用的图片URL，如：    
 ```
 https://github.com/PeryZen/markdown/blob/master/img/复仇者联盟之超人笑笑.jpeg
 ```

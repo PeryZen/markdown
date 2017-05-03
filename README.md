@@ -26,7 +26,7 @@
 
 <h2 id="10">插入图片</h2>
 
-### 语法    
+### 语法
 ```
 // Markdown
 ![desc](url)
@@ -37,7 +37,7 @@
 
 Markdown是纯文本编辑的，无法像富文本那样直接引用图片，只能引用图片的URL（本地图片URL，网络图片URL），例如：  
 
-* 本地图片    
+* 本地图片
 ```
 // Markdown
 ![复仇者联盟之超人笑笑](/Users/Pery/Pictures/复仇者联盟之超人笑笑.png)
@@ -46,7 +46,7 @@ Markdown是纯文本编辑的，无法像富文本那样直接引用图片，只
 <img alt="复仇者联盟之超人笑笑" src="/Users/Pery/Pictures/复仇者联盟之超人笑笑.png">
 ```
 
-* 网络图片    
+* 网络图片
 ```
 // Markdown
 ![复仇者联盟之超人笑笑](https://github.com/PeryZen/MarkdownImages/blob/master/复仇者联盟之超人笑笑.jpeg)

@@ -49,7 +49,7 @@ class Operation:
         if rsp.status_code == 404:
             # if 'remote_path' is defined, it's possible that the remote_path is not exists.
             # TODO: create remote_path
-            print ("list_repo: remote_path {path} is not exists.".format(**config))
+            raise RuntimeError("list_repo: remote_path {path} is not exists.".format(**config))
 
         elif rsp.status_code != 200:
             raise RuntimeError("list_repo: request failed: " + str(rsp.status_code))
@@ -71,6 +71,10 @@ class Operation:
             base64.b64encode(data).decode('ascii'),
             self.config['message_template_create']
         )
+
+        if rsp.status_code != 200 and rsp.status_code != 201:
+            raise RuntimeError("create_file request failed: " + str(rsp.status_code))
+
         return Operation.__extract_filename(rsp)
 
     def update_file(self, old_sha):
@@ -86,6 +90,9 @@ class Operation:
             base64.b64encode(data).decode('ascii'),
             self.config['message_template_update']
         )
+
+        if rsp.status_code != 200 and rsp.status_code != 201:
+            raise RuntimeError("update_file request failed: " + str(rsp.status_code))
 
         return Operation.__extract_filename(rsp)
 
@@ -158,9 +165,6 @@ class Operation:
             json=params,
             **self.__requests_kwargs()
         )
-
-        if rsp.status_code != 200:
-            print ("create_or_update_file failed:" + str(rsp.status_code))
 
         return rsp
 

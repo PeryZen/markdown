@@ -13,64 +13,81 @@ except ImportError:
     from configparser import ConfigParser
 
 
-def img2url():
-
-    # 读取配置文件
-    config = ConfigParser()
-    config.read("config.ini")
-
-    # 读取剪切板
-    file_path, is_tempfile = Clipboard.paste()
-    if file_path and os.path.isfile(file_path):
-        print(file_path)
-
-        resource_url = upload_file(config, file_path)
-        print(resource_url)
-
-        url = translate_url(resource_url)
-        Clipboard.copy(url)
-        print(url)
-
-        if is_tempfile:
-            os.remove(file_path)
-
-
-def upload_file(config, file_path, remote_path=None):
+class Img2Url:
     """
-    :param config:      配置信息
-    :param file_path:   上传文件的路径
-    :param remote_path: 仓库的目录路径
-    :return: 
+    基于图库，将指定路径或者剪切板里的图片转换为Markdown的图片引用
     """
+    def __init__(self):
+        # 读取配置文件
+        self.config = ConfigParser()
+        self.config.read("config.ini")
 
-    operator = Operation(dict(config.items('github')), file_path, remote_path)
+    def translate_img(self, img_path=None):
+        if img_path is None:
+            # 读取剪切板
+            file_path, is_tempfile = Clipboard.paste()
+        else:
+            file_path = img_path
+            is_tempfile = False
 
-    # load remote files.
-    exist_files = operator.list_repo()
-    if operator.filename in exist_files:
-        if operator.file_sha == exist_files[operator.filename]:
-            # case 1, file already exists in remote repository.
-            filename = operator.filename
+        if file_path and os.path.isfile(file_path):
+            # print(file_path)
+
+            resource_url = self.__upload_file(file_path)
+            if resource_url is None:
+                return None
+            print(resource_url)
+
+            url = self.__translate_url(resource_url)
+            Clipboard.copy(url)  # 写入剪切板
+            print(url)
+
+            if is_tempfile:
+                os.remove(file_path)
+
+            return url
+        else:
+            return None
+
+    def __upload_file(self, file_path, remote_path=None):
+        """
+        :param file_path:   上传文件的路径
+        :param remote_path: 仓库的目录路径
+        :return: 
+                图库中该文件的url
+        """
+
+        operator = Operation(dict(self.config.items('github')), file_path, remote_path)
+
+        # load remote files.
+        exist_files = operator.list_repo()
+        if operator.filename in exist_files:
+            if operator.file_sha == exist_files[operator.filename]:
+                # case 1, file already exists in remote repository.
+                filename = operator.filename
+
+            else:
+                # case 2, filename conflicts, treat it as update.
+                filename = operator.update_file(exist_files[operator.filename])
 
         else:
-            # case 2, filename conflicts, treat it as update.
-            filename = operator.update_file(exist_files[operator.filename])
+            # case 3, file not exists.
+            filename = operator.create_file()
 
-    else:
-        # case 3, file not exists.
-        filename = operator.create_file()
+        if filename is None:
+            return None
+        else:
+            return operator.resource_url(filename)
 
-    return operator.resource_url(filename)
+    @staticmethod
+    def __translate_url(url, alt=None):
+        """
+        转换为Markdown的图片引用格式
+        """
+        if alt is None:
+            return "![]({0})".format(url)
+        else:
+            return "![{0}]({1})".format(alt, url)
 
-
-def translate_url(url, alt=None):
-    """
-    转换为Markdown的图片引用
-    """
-    if alt is None:
-        return "![]({0})".format(url)
-    else:
-        return "![{0}]({1})".format(alt, url)
-
-
-img2url()
+img2url = Img2Url()
+img2url.translate_img()
